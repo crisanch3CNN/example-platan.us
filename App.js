@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react'
-import { Text, TextInput, View, SafeAreaView, Button, Alert } from 'react-native';
+import { Text, TextInput, View, SafeAreaView, Button, Alert, ActivityIndicator } from 'react-native';
 import tailwind from 'tailwind-rn';
 import axios from 'axios';
 
@@ -9,6 +9,7 @@ export default function App() {
 
   const [value, setValue] = useState('');
   const [age, setAge] = useState(null);
+  const [loalding, setLoalding] = useState(false);
 
   async function handleClick() {
     // Alert.alert('Hola');
@@ -29,7 +30,13 @@ export default function App() {
           <Button title="Calcular" onPress={handleClick} />
         </View>
         <Text style={tailwind('text-white mt-2')} >Tu edad aproximada es ....</Text>
-        <Text style={tailwind('text-white text-lg')}>{age}</Text>
+        {!loalding && (
+          <Text style={tailwind('text-white text-lg')}>{age}</Text>
+        )}
+        {loalding && (
+          <ActivityIndicator size="large" style={tailwind('mt-2')} />
+        )}
+
 
         <StatusBar style="light" />
       </View>
