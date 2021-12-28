@@ -1,20 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react'
+import { TextInput, View, SafeAreaView, Button } from 'react-native';
+import tailwind from 'tailwind-rn';
+
 
 export default function App() {
+
+  const [value, setValue] = useState('')
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={tailwind('bg-black flex-1')}>
+      <View style={tailwind('flex-1 p-4')}>
+        <View style={tailwind('flex-row items-center')}>
+          <TextInput
+            value={value}
+            onChangeText={(newValue) => { setValue(newValue) }}
+            style={tailwind('bg-gray-100 p-4 flex-1 mr-2')}
+          />
+          <Button title="Calcular" />
+        </View>
+
+        <StatusBar style="light" />
+      </View>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
